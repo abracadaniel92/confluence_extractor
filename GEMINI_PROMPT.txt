@@ -1,0 +1,195 @@
+# Gemini Prompt for Creating Production Go-Live Release Notes
+
+Use this prompt in Google Gemini to synthesize all individual release notes into a single, cohesive Production Go-Live Release Note.
+
+## Prompt
+
+```
+You are a Product Manager and Technical Writer. You are provided with a merged text file containing release notes for multiple versions of a software product (from Version 1.0.0 to the latest version).
+
+**CRITICAL INSTRUCTION: Your task is to SYNTHESIZE all these individual release notes into a SINGLE Production Go-Live Release Note. Do NOT output separate sections for each version. Instead, AGGREGATE the value delivered across all versions into ONE cohesive document.**
+
+## Output Structure
+
+```markdown
+# Production Go-Live Release Notes - [Product Name]
+
+**Cumulative Version:** [Latest Version Number]  
+**Date:** [Date of Latest Version]
+
+## Executive Summary
+
+[A high-level paragraph (3-5 sentences) summarizing the product's main purpose, key achievements across all versions, and the significance of this go-live. This should read like a launch announcement - professional, exciting, and confidence-inspiring.]
+
+## Key Features & Capabilities
+
+[Group ALL features from ALL releases into 3-5 logical themes/categories (e.g., "User Management," "Security & Authentication," "Data Management," "Reporting & Analytics," "Integration Capabilities"). Do NOT list them chronologically by version. Instead, organize by functional area.]
+
+### [Category Name 1]
+
+- [Synthesized feature description - describe the final/complete state of the feature, not when it was added]
+- [Another synthesized feature description]
+- [Continue with all related features from all versions]
+
+### [Category Name 2]
+
+- [Synthesized feature description]
+- [Another synthesized feature description]
+- [Continue with all related features from all versions]
+
+[Continue for all categories...]
+
+## Stability & Reliability Enhancements
+
+[Summarize the major bugs fixed and stability improvements across ALL versions. Do NOT list every Jira ticket individually. Group them by impact area (e.g., "Database Stability," "UI/UX Improvements," "Security Hardening," "Performance Optimizations"). Focus on the business impact, not individual ticket numbers.]
+
+### [Impact Area 1]
+
+- [High-level description of fixes in this area]
+- [Another high-level description]
+
+### [Impact Area 2]
+
+- [High-level description of fixes in this area]
+- [Another high-level description]
+
+[Continue for all impact areas...]
+
+## Deployment Information
+
+**Current Version:** [Latest Version Number]
+
+**Documentation:** [Mention any updates to docs/READMEs found in the notes across all versions]
+
+**Configuration:** [Mention any config changes like appsettings.json, environment variables, etc. found across all versions]
+
+**Known Limitations:** [If there are any known issues mentioned in the latest release, include them here with workarounds]
+```
+
+## Detailed Instructions
+
+### Step 1: Analyze the Range
+1. Scan the entire file to identify the earliest version and the latest version
+2. Use the latest version's date and number for the header
+3. Note the total number of releases to understand the scope
+
+### Step 2: Identify Themes (CRITICAL - Do NOT skip this step)
+1. Read through ALL "New Features" and "Improvements" sections across ALL releases
+2. Create 3-5 logical categories that group related features together
+3. **Example:** 
+   - If Version 1.0 added "User Login" and Version 1.6 added "2FA" and Version 2.0 added "Password Recovery", group them ALL under "Security & Authentication"
+   - If Version 1.2 added "Export to Excel" and Version 1.8 added "Export to PDF", group them under "Data Export Capabilities"
+4. **Do NOT create a category for each version - create categories based on functionality**
+
+### Step 3: Synthesize Features (CRITICAL - This is NOT reformatting)
+1. For each feature mentioned across versions, describe its FINAL/COMPLETE state
+2. **Example:** Instead of saying "Version 1.0 added Login, Version 1.6 added 2FA", say "Comprehensive authentication system including user login, two-factor authentication, and password recovery"
+3. If a feature was introduced early and improved later, describe the improved version
+4. **Deduplicate:** If the same feature appears in multiple releases (e.g., "Extended WaveNet functionality" appears in multiple versions), combine them into one comprehensive description
+5. **Avoid chronological references:** Do NOT say "In version X we added Y". Instead, say "The product includes Y"
+
+### Step 4: Summarize Fixes
+1. Look at ALL "Bug Fixes" sections across ALL releases
+2. Group fixes by impact area (Database, UI, Security, Performance, etc.)
+3. **Do NOT list individual ticket numbers** (SUP-123, AXM-456) unless they are critical security issues or data loss prevention
+4. Instead of "Fixed bug where button didn't click (SUP-123)", write "Resolved UI interaction issues ensuring all interface elements respond correctly"
+5. **Highlight critical fixes:** Emphasize fixes related to:
+   - Data loss prevention
+   - Security vulnerabilities
+   - System stability
+   - Performance bottlenecks
+
+### Step 5: Create Executive Summary
+1. Write 3-5 sentences that capture:
+   - What the product does (main purpose)
+   - Key achievements across all versions
+   - Why this go-live is significant
+2. **Tone:** Professional, exciting, confidence-inspiring (this is a launch announcement)
+3. **Do NOT mention version numbers** in the summary - focus on capabilities
+
+### Step 6: Compile Deployment Information
+1. Extract any documentation updates mentioned across all versions
+2. Extract any configuration changes (appsettings.json, environment variables, etc.)
+3. Include any known limitations from the latest release (if mentioned)
+
+## Special Handling
+
+### What to IGNORE:
+- **Instructional text:** Remove any "How to use this page" or tool-specific instructions
+- **Version-by-version breakdowns:** Do NOT create sections like "Version 1.0 Features", "Version 1.1 Features"
+- **Chronological ordering:** Do NOT organize by release date
+- **Individual ticket references:** Do NOT list every Jira ticket (SUP-123, AXM-456) unless critical
+
+### What to SYNTHESIZE:
+- **Related features:** Combine features that are part of the same functional area
+- **Feature evolution:** If a feature was added in v1.0 and enhanced in v2.0, describe the final enhanced version
+- **Repeated mentions:** If the same improvement appears in multiple releases, mention it once
+- **Similar fixes:** Group similar bug fixes together (e.g., "Various UI/UX improvements" instead of listing each one)
+
+### Terminology Consistency:
+- If the notes mention a terminology change (e.g., changing "SAP" to "SUP"), ensure the final output uses the NEW terminology consistently throughout
+- Use the terminology from the LATEST release
+
+### Formatting Requirements:
+- Use clean Markdown with bold headers (`##`) and bullet points
+- Keep descriptions concise but informative
+- Use sub-bullets for related items within a category
+- Maintain professional tone throughout
+
+## Example of Synthesis (NOT Reformatting)
+
+**WRONG (Reformatting - Do NOT do this):**
+```markdown
+## Version 1.0.0 Features
+- Added user login
+- Added password setup
+
+## Version 1.1.0 Features  
+- Added password recovery
+- Added change password
+
+## Version 1.6.0 Features
+- Added 2FA
+```
+
+**CORRECT (Synthesizing - Do this):**
+```markdown
+## Security & Authentication
+
+- Comprehensive user authentication system including secure login, password setup, password recovery, and change password functionality
+- Two-factor authentication (2FA) for enhanced security
+- Password management with recovery and reset capabilities
+```
+
+## Critical Reminders
+
+1. **ONE document, not multiple:** Output a SINGLE cohesive release note, not separate sections per version
+2. **Synthesize, don't reformat:** Combine and aggregate information, don't just reorganize it
+3. **Group by function, not by version:** Organize features by what they do, not when they were added
+4. **Describe final state:** Tell readers what the product CAN DO NOW, not what was added in each version
+5. **Professional launch tone:** This is a go-live announcement - make it exciting and confidence-inspiring
+
+Now, please synthesize the provided release notes file into a single Production Go-Live Release Note according to these instructions.
+```
+
+## Usage
+
+1. Open the merged release notes file (`ALL_RELEASES_MERGED_Deployment.txt`)
+2. Copy its entire contents
+3. Go to [Google Gemini](https://gemini.google.com/)
+4. Copy the prompt above (everything between the triple backticks)
+5. Paste the prompt into Gemini
+6. Then paste the release notes content
+7. Gemini should synthesize all releases into ONE production release note
+8. Copy the formatted output and save it as `PRODUCTION_GO_LIVE_RELEASE_NOTES.md`
+
+## Tips
+
+- **If Gemini still reformats by version:** Add this at the end: "Remember: Create ONE document that synthesizes all versions. Do NOT create separate sections for each version."
+- **If output is too detailed:** Ask Gemini to "make the executive summary more concise" or "group similar features together more aggressively"
+- **If missing features:** Ask Gemini to "include all features from all versions, not just the latest ones"
+- **For specific focus:** You can ask Gemini to "emphasize security features" or "highlight user-facing improvements" if needed
+
+## Expected Output
+
+The output should be a single, cohesive document that reads like a product launch announcement, not a changelog. It should tell the story of what the product can do NOW, not what was added in each version.
