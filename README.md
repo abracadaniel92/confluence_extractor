@@ -81,7 +81,7 @@ python confluence_folder_extractor.py "url1" "url2" "url3"
 
 **Example:**
 ```bash
-python confluence_folder_extractor.py "https://simonsvoss.atlassian.net/wiki/spaces/SuperAdmin/folder/1898643458"
+python confluence_folder_extractor.py "https://your-domain.atlassian.net/wiki/spaces/YourSpace/folder/1234567890"
 ```
 
 ### Merge Exported Files
@@ -202,7 +202,7 @@ If tables don't appear correctly:
 
 ```bash
 cd Scripts/confluence_exports
-python confluence_folder_extractor.py "https://simonsvoss.atlassian.net/wiki/spaces/SuperAdmin/folder/1898643458"
+python confluence_folder_extractor.py "https://your-domain.atlassian.net/wiki/spaces/YourSpace/folder/1234567890"
 ```
 
 ### Merge All Release Notes

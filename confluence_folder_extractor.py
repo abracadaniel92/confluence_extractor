@@ -8,7 +8,7 @@ Extracts all pages from Confluence folders recursively and exports them to:
 Each folder gets its own output directory with all pages preserved.
 
 Usage:
-    python confluence_folder_extractor.py "https://simonsvoss.atlassian.net/wiki/spaces/SuperAdmin/folder/1898643458"
+    python confluence_folder_extractor.py "https://your-domain.atlassian.net/wiki/spaces/YourSpace/folder/1234567890"
     
     Or multiple folders:
     python confluence_folder_extractor.py "url1" "url2" "url3"
@@ -51,10 +51,9 @@ def load_credentials():
                 key, value = line.split('=', 1)
                 credentials[key.strip()] = value.strip()
     
-    # Use SimonsVoss credentials
-    CONFLUENCE_BASE_URL = credentials.get('CONFLUENCE_BASE_URL', credentials.get('SIMONSVOSS_JIRA_BASE_URL', ''))
-    CONFLUENCE_API_EMAIL = credentials.get('CONFLUENCE_API_EMAIL', credentials.get('SIMONSVOSS_JIRA_API_EMAIL', ''))
-    CONFLUENCE_API_TOKEN = credentials.get('CONFLUENCE_API_TOKEN', credentials.get('SIMONSVOSS_JIRA_API_TOKEN', ''))
+    CONFLUENCE_BASE_URL = credentials.get('CONFLUENCE_BASE_URL', '')
+    CONFLUENCE_API_EMAIL = credentials.get('CONFLUENCE_API_EMAIL', '')
+    CONFLUENCE_API_TOKEN = credentials.get('CONFLUENCE_API_TOKEN', '')
     
     if not all([CONFLUENCE_BASE_URL, CONFLUENCE_API_EMAIL, CONFLUENCE_API_TOKEN]):
         raise ValueError("Missing required credentials. Check Tokens_txt.txt file.")
@@ -1056,7 +1055,7 @@ def main():
         print("Usage: python confluence_folder_extractor.py <folder_url1> [folder_url2] ...")
         print("   OR: python confluence_folder_extractor.py --merge <folder_path> [txt|word]")
         print("\nExamples:")
-        print('  python confluence_folder_extractor.py "https://simonsvoss.atlassian.net/wiki/spaces/SuperAdmin/folder/1898643458"')
+        print('  python confluence_folder_extractor.py "https://your-domain.atlassian.net/wiki/spaces/YourSpace/folder/1234567890"')
         print('  python confluence_folder_extractor.py --merge "confluence_exports/Deployment"')
         print('  python confluence_folder_extractor.py --merge "confluence_exports/Deployment" word')
         sys.exit(1)
